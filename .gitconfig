@@ -1,0 +1,27 @@
+[color]
+    diff = auto
+    difftool = auto
+    status = auto
+    branch = auto
+    grep = auto
+    log = auto
+[branch]
+    autosetuprebase = always
+[rerere]
+    enabled = 1
+[alias]
+    check = diff --cached --color=always
+    co = checkout
+    fix = commit --am
+    llog = log --graph --decorate --name-status --color=always
+    logp = log --graph --decorate -p --word-diff
+    rework = rebase --interactive HEAD~10
+    wcheck = diff --cached --color-words
+    wdiff = diff --color-words
+    wshow = show --color-words
+[push]
+    default = upstream
+[core]
+  	excludesfile = $HOME/.gitignore
+[merge]
+    ff = only
