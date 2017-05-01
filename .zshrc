@@ -32,4 +32,7 @@ export NVM_DIR="$HOME/.nvm"
 
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
+export VISUAL='nvim'
+export EDITOR="$VISUAL"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
