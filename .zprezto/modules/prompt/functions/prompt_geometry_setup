@@ -156,7 +156,8 @@ function prompt_geometry_set_title {
 }
 
 function prompt_geometry_render {
-  PROMPT="%(?.$PROMPT_SYMBOL.$EXIT_VALUE_SYMBOL) %{%F{yellow}%}%3~%f $(vi_mode_prompt_info)%f "
+  PROMPT="
+%(?.$PROMPT_SYMBOL.$EXIT_VALUE_SYMBOL) %{%F{yellow}%}%3~%f $(vi_mode_prompt_info)%f "
 
   PROMPT2=" $RPROMPT_SYMBOL "
   RPROMPT="$(prompt_geometry_git_info)"
