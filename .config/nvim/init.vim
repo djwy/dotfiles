@@ -49,7 +49,15 @@ let g:ale_sign_warning = '__'
 let mapleader = "\<Space>"
 
 nnoremap <C-p> :FZF<CR>
-nnoremap <C-f> :Ag<Space>
+nnoremap <C-f> :Rg<Space>
+
+" use ripgrep
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 " paste using automatic indentation
 map <Leader>p :set paste<CR><esc>"*]p:set nopaste<cr>
