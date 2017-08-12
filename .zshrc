@@ -24,15 +24,11 @@ nonmaster_branches () {
 }
 
 eval "$(rbenv init -)"
+eval "$(nodenv init -)"
 
-export KEYTIMEOUT=1
-
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
-
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-
-export VISUAL='nvim'
 export EDITOR="$VISUAL"
+export FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-case --ignore .git -g ""'
+export KEYTIMEOUT=1
+export VISUAL='nvim'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
