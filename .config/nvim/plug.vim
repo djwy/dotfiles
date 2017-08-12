@@ -19,6 +19,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+Plug 'tpope/vim-commentary'
+
+Plug 'w0rp/ale'
+
 " Plug 'Shougo/deoplete.nvim'
 
 " === git ===

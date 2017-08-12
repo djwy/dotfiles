@@ -39,6 +39,9 @@ let g:airline_powerline_fonts=1
 " let g:deoplete#sources._ = ['buffer', 'tag', 'file']
 " let deoplete#tag#cache_limit_size = 5000000
 
+" === ale ===
+let g:ale_sign_error = '!!'
+let g:ale_sign_warning = '__'
 
 " === mappings ===
 
