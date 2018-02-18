@@ -27,7 +27,7 @@ eval "$(rbenv init -)"
 eval "$(nodenv init -)"
 
 export EDITOR="$VISUAL"
-export FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-case ""'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --ignore-case --hidden --follow --glob "!.git/*"'
 export KEYTIMEOUT=1
 export VISUAL='nvim'
 
