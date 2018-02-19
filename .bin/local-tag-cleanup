@@ -1,0 +1,197 @@
+#!/usr/bin/env ruby
+
+require "active_support/all"
+
+module TagWerk
+  class PurgeDeathRow
+    class << self
+      def call(convicted)
+        new(convicted).call
+      end
+    end
+
+    def initialize(convicted)
+      @convicted = convicted
+    end
+
+    def call
+      convicted.each_slice(slice_size).with_index(1) do |slice, index|
+        puts "processing slice #{index} of #{chunk_count}"
+
+        stringified_kill_list = slice.join(" ")
+
+        system("git tag --delete #{stringified_kill_list}")
+      end
+    end
+
+    attr_reader :convicted
+
+    def chunk_count
+      (convicted.count / slice_size) + 1
+    end
+
+    def slice_size
+      100
+    end
+  end
+
+  class OldNonProductionTags
+    class << self
+      def list
+        mapped_tags.group_by(&:environment).map do |environment, members|
+          TagGroup.losers(environment: environment, members: members)
+        end.flatten.map(&:to_s)
+      end
+
+      def system_output
+        @system_output ||= `git tag -l | grep -v "^production"`
+      end
+
+      def mapped_tags
+        @mapped_tags ||= system_output.split("\n").map { |tag| Tag.new(tag) }
+      end
+    end
+  end
+
+  class TagGroup
+    def initialize(environment:, members:)
+      @environment = environment
+      @members = members
+    end
+
+    class << self
+      def losers(environment:, members:)
+        new(environment: environment, members: members).losers
+      end
+    end
+
+    attr_reader :environment, :members
+
+    def valid_environment?
+      Environment.list.include?(environment)
+    end
+
+    def losers
+      return members unless valid_environment?
+
+      initial_segment = members.sort[0...-1]
+      initial_segment.size > 1 ? initial_segment : []
+    end
+  end
+
+  class Tag
+    include Comparable
+
+    def initialize(name)
+      @name = name
+    end
+
+    attr_reader :name
+
+    def to_s
+      name
+    end
+
+    def <=>(other)
+      timestamp <=> other.timestamp
+    end
+
+    def environment
+      name.split(TimestampRegex.call).first
+    end
+
+    def timestamp
+      Integer(name.split(TimestampRegex.call).last)
+    end
+  end
+
+  class Environment
+    class << self
+      def list
+        @list ||=
+          Dir.entries("./config/deploy").
+            select { |entry| entry.match(".rb") }.
+            map { |filename| filename.split(".rb").first }
+      end
+    end
+  end
+
+  class OldProductionTags
+    class << self
+      def all_tags
+        @all_tags ||=
+          `git tag -l | grep '^production'`.
+            split("\n")
+      end
+
+      def all_timestamps
+        @all_timestamps ||=
+          all_tags.
+            map { |str| str.match(TimestampRegex.call)&.captures&.first }.
+            reject(&:blank?).
+            map(&:to_i)
+      end
+
+      def old_timestamps
+        @old_timestamps ||=
+          all_timestamps.select { |tag| tag < split_tag }
+      end
+
+      def list
+        @list ||=
+          begin
+            all_tags.select do |tag|
+              timestamp = tag.match(TimestampRegex.call)&.captures&.first
+              !!timestamp && old_timestamps.include?(timestamp.to_i)
+            end
+          end
+      end
+
+      def split_tag
+        Integer(6.months.ago.strftime("%Y%m%d%H%M%S"))
+      end
+    end
+  end
+
+  class TagsWithNoTimestamp
+    class << self
+      def list
+        @list ||= all_tags.reject { |tag| tag.match(TimestampRegex.call) }
+      end
+
+      def all_tags
+        @all_tags ||= `git tag -l`.split("\n")
+      end
+    end
+  end
+
+  class TimestampRegex
+    class << self
+      def call
+        /\-(\d{14})/
+      end
+    end
+  end
+
+  class MassMurder
+    class << self
+      def list
+        [
+          TagsWithNoTimestamp,
+          OldProductionTags,
+          OldNonProductionTags,
+        ].map(&:list).reduce(:+)
+      end
+    end
+  end
+
+  class KillEmAll
+    class << self
+      def call
+        PurgeDeathRow.call(MassMurder.list)
+      end
+    end
+  end
+end
+
+TagWerk::KillEmAll.call
