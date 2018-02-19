@@ -1,2 +1,21 @@
-.config/nvim/autoload/*
-.config/nvim/plugged/*
+# Ignore working files for nvim
+/.config/nvim/swap/*
+/.config/nvim/backup/*
+/.config/nvim/undo/*
+/.config/nvim/sessions/*
+/.config/nvim/plugged/
+/.config/nvim/autoload/
+/.config/nvim/.init.vim-rplugin~
+/.config/nvim/.netrwhist
+
+/.config/.mono/*
+
+# Ignore github credentials
+/.config/hub
+
+/.config/yarn/global/
+/.config/configstore/
+
+!.keep
+
+/node_modules
