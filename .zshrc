@@ -3,6 +3,10 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# Add my scripts to the path
+export PROJECTS_PATH="$HOME/dev"
+export PATH="$HOME/.bin:$PATH"
+
 # Aliases
 alias be='bundle exec'
 alias gd='git diff --color=always | less -R'
@@ -11,24 +15,19 @@ alias gs='git status'
 alias irb='pry'
 alias l='ls'
 alias ls='ls -GFhla'
-alias prune='nonmaster_branches | xargs -I {} git branch -d {}'
-# alias rake='noglob rake'
+alias prune='nonmaster-branches | xargs -I {} git branch -d {}'
 alias rbtest='ruby -Itest'
 alias reload_shell='source $HOME/.zshrc'
 alias vi='nvim'
 
-nonmaster_branches () {
-  CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-  BRANCHES_TO_EXCLUDE="master\|production\|$CURRENT_BRANCH"
-  echo $(git branch | grep -v $BRANCHES_TO_EXCLUDE) | tr " " "\n"
-}
-
-eval "$(rbenv init -)"
-eval "$(nodenv init -)"
+eval "$(rbenv init -)" 2> /dev/null
+eval "$(nodenv init -)" 2> /dev/null
 
 export EDITOR="$VISUAL"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --ignore-case --hidden --follow --glob "!.git/*"'
 export KEYTIMEOUT=1
 export VISUAL='nvim'
+
+unsetopt nomatch
 
 [ -f ~/.fzf.zsh ] && source $HOME/.fzf.zsh
