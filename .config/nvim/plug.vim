@@ -7,6 +7,7 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -22,8 +23,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-commentary'
 
 Plug 'w0rp/ale'
-
-" Plug 'Shougo/deoplete.nvim'
 
 " === git ===
 Plug 'airblade/vim-gitgutter'

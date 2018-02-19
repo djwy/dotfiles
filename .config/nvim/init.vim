@@ -1,18 +1,27 @@
 syntax on
 filetype plugin indent on
 
+
 " === plugins ===
+
 source ~/.config/nvim/plug.vim
 
 
 " === NERDTree ===
+
 let NERDTreeShowHidden=1
-" let g:nerdtree_tabs_open_on_console_startup=1
+
 
 " === theme ===
-colorscheme PlasticCodeWrap
+
+let g:quantum_black=1
+set background=dark
+set termguicolors
+colorscheme quantum
+
 
 " === fzf ===
+
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -27,21 +36,19 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-" === airline ===
-let g:airline_powerline_fonts=1
 
-" === deoplete ===
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#enable_smart_case = 1
-" let g:deoplete#sources#syntax#min_keyword_length = 3
-" let g:deoplete#auto_complete_start_length = 1
-" let g:deoplete#sources = {}
-" let g:deoplete#sources._ = ['buffer', 'tag', 'file']
-" let deoplete#tag#cache_limit_size = 5000000
+" === airline ===
+
+let g:airline_powerline_fonts=1
+let g:airline_theme='quantum'
+
 
 " === ale ===
+
+let g:ale_fixers = { 'ruby': ['rubocop'] }
 let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '__'
+
 
 " === mappings ===
 
@@ -54,7 +61,7 @@ nnoremap <C-f> :Rg<Space>
 " use ripgrep
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --ignore-case --color=always '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
