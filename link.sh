@@ -16,3 +16,5 @@ for file in $DOTFILES; do
   rm -rf $destination
   ln -s $file $destination
 done
+
+ln -s $DIR/.themes/prompt_geometry_setup $HOME/.zprezto/modules/prompt/functions
