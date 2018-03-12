@@ -24,6 +24,8 @@ Plug 'tpope/vim-commentary'
 
 Plug 'w0rp/ale'
 
+Plug 'nathanaelkane/vim-indent-guides'
+
 " === git ===
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'

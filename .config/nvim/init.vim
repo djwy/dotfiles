@@ -19,6 +19,8 @@ set background=dark
 set termguicolors
 colorscheme quantum
 
+hi CursorLine guibg=#474646
+
 
 " === fzf ===
 
@@ -61,7 +63,7 @@ nnoremap <C-f> :Rg<Space>
 " use ripgrep
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --ignore-case --color=always '.shellescape(<q-args>), 1,
+  \   'rg --column --hidden --line-number --no-heading --ignore-case --color=always '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -142,7 +144,10 @@ set autoindent
 
 " show whitespaces
 set list
-set listchars+=space:␣
+set listchars+=eol:¬,space:·
+
+let g:indent_guides_enable_on_vim_startup = 1
+
 
 
 " === line width / word wrap ===
