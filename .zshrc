@@ -23,11 +23,16 @@ alias vi='nvim'
 eval "$(rbenv init -)" 2> /dev/null
 eval "$(nodenv init -)" 2> /dev/null
 
-export EDITOR="$VISUAL"
+export EDITOR='nvim'
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --ignore-case --hidden --follow --glob "!.git/*"'
 export KEYTIMEOUT=1
-export VISUAL='nvim'
+export VISUAL="$EDITOR"
 
 unsetopt nomatch
+
+# turn carriage returns into newlines
+stty icrnl
+
+ssh-add -A
 
 [ -f ~/.fzf.zsh ] && source $HOME/.fzf.zsh
