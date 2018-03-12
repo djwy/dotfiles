@@ -21,8 +21,6 @@
     ui = auto
 [commit]
     verbose = true
-[core]
-    excludesfile = $HOME/.gitignore_global
 [diff]
     compactionHeuristic = true
 [merge]
