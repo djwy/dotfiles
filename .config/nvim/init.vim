@@ -45,7 +45,11 @@ let g:lightline = { 'colorscheme': 'snazzy' }
 
 " === ale ===
 
-let g:ale_fixers = { 'ruby': ['rubocop'] }
+let g:ale_fixers = {
+  \ 'css': ['stylelint'],
+  \ 'javascript': ['eslint', 'prettier'],
+  \ 'ruby': ['rubocop']
+\}
 let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '__'
 
