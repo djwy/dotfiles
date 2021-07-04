@@ -7,35 +7,31 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
 Plug 'chrisbra/Colorizer'
-
+Plug 'connorholyday/vim-snazzy'
+Plug 'dense-analysis/ale'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
-Plug 'tpope/vim-commentary'
-
-Plug 'w0rp/ale'
-
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree' |
+            \ Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-cucumber'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-surround'
 
 " === git ===
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " === syntax ===
-Plug 'kchmck/vim-coffee-script'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'slim-template/vim-slim'
-
 
 " required!
 filetype plugin indent on

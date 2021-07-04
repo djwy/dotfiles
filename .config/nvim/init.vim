@@ -14,12 +14,11 @@ let NERDTreeShowHidden=1
 
 " === theme ===
 
-let g:quantum_black=1
 set background=dark
 set termguicolors
-colorscheme quantum
+colorscheme snazzy
 
-hi CursorLine guibg=#474646
+hi CursorLine guibg=#394066
 
 
 " === fzf ===
@@ -39,10 +38,9 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 
-" === airline ===
+" === lightline ===
 
-let g:airline_powerline_fonts=1
-let g:airline_theme='quantum'
+let g:lightline = { 'colorscheme': 'snazzy' }
 
 
 " === ale ===
@@ -144,7 +142,7 @@ set autoindent
 
 " show whitespaces
 set list
-set listchars+=eol:¬,space:·
+set listchars+=eol:¬
 
 let g:indent_guides_enable_on_vim_startup = 1
 
