@@ -43,6 +43,6 @@ tags
 tags.temp
 tags.lock
 
-node_modules
+./node_modules
 
 .vimsesh*
