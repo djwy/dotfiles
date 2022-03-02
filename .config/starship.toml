@@ -1,5 +1,10 @@
+command_timeout = 1000
+
 [aws]
 symbol = "  "
+
+[battery]
+disabled = true
 
 [conda]
 symbol = " "
@@ -8,9 +13,13 @@ symbol = " "
 symbol = " "
 
 [directory]
+fish_style_pwd_dir_length = 1
 read_only = " "
+truncate_to_repo = false
+truncation_length = 5
 
 [docker_context]
+disabled = true
 symbol = " "
 
 [elixir]
