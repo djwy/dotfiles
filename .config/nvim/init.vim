@@ -7,16 +7,19 @@ filetype plugin indent on
 source ~/.config/nvim/plug.vim
 
 
-" === NERDTree ===
+" === NvimTree ===
 
-let NERDTreeShowHidden=1
+lua require'nvim-tree'.setup {}
 
 
 " === theme ===
 
 set background=dark
+
 set termguicolors
 colorscheme snazzy
+
+set guifont=Fira\ Code:h12
 
 hi CursorLine guibg=#394066
 
@@ -45,13 +48,28 @@ let g:lightline = { 'colorscheme': 'snazzy' }
 
 " === ale ===
 
-let g:ale_fixers = {
-  \ 'css': ['stylelint'],
-  \ 'javascript': ['eslint', 'prettier'],
-  \ 'ruby': ['rubocop']
-\}
-let g:ale_sign_error = '!!'
-let g:ale_sign_warning = '__'
+let g:ale_linters=
+\ { 'javascript.jsx': ['prettier', 'eslint'],
+  \ 'ruby': ['rubocop'],
+  \ 'svg': ['svglint'] }
+let g:ale_fixers=
+\ { 'css': ['prettier', 'stylelint'],
+  \ 'javascript.jsx': ['prettier', 'eslint'],
+  \ 'javascript': ['prettier', 'eslint'],
+  \ 'ruby': ['rubocop'],
+  \ 'scss': ['prettier', 'stylelint'],
+  \ 'svg': ['xmllint'],
+  \ 'xml': ['xmllint'] }
+let g:ale_sign_error='!!'
+let g:ale_sign_warning='__'
+let g:ale_virtualenv_dir_names=[]
+let g:ale_cache_executable_check_failures=1
+let g:ale_sign_column_always = 1
+" let g:ale_lint_on_save = 1
+" let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
 
 
 " === mappings ===
@@ -65,7 +83,7 @@ nnoremap <C-f> :Rg<Space>
 " use ripgrep
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --hidden --line-number --no-heading --ignore-case --color=always '.shellescape(<q-args>), 1,
+  \   'rg --column --no-messages --hidden --line-number --no-heading --ignore-case --color=always '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -82,8 +100,8 @@ map <Leader>cff :let @* = expand("%:p")<CR>
 " get full directory of buffer
 map <Leader>cd :let @* = expand("%:p:h")<CR>
 
-" find file in NERDTree
-map <Leader>ff :NERDTreeFind<CR>
+" find file in NvimTree
+map <Leader>ff :NvimTreeFindFile<CR>
 
 " remove highlight
 map <Leader>h :noh<CR>
@@ -148,9 +166,6 @@ set autoindent
 set list
 set listchars+=eol:¬
 
-let g:indent_guides_enable_on_vim_startup = 1
-
-
 
 " === line width / word wrap ===
 " text width
@@ -205,6 +220,9 @@ set undodir=$HOME/.vim/undo
 " use system clipboard
 set clipboard=unnamed
 
+" workaround some broken plugins which set guicursor indiscriminately.
+set guicursor=
+autocmd OptionSet guicursor noautocmd set guicursor=
 
 " === key bindings ===
 
