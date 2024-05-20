@@ -8,6 +8,7 @@ return {
     lualine.setup({
       options = {
         theme = "tokyonight",
+        disabled_filetypes = { "NvimTree", "TelescopePrompt" },
       },
       sections = {
         lualine_x = {
