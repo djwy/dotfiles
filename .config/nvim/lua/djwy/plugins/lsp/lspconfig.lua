@@ -125,6 +125,17 @@ return {
             },
           })
         end,
+        ["ruby_lsp"] = function()
+          lspconfig["ruby_lsp"].setup({
+            capabilities = capabilities,
+            cmd_env = { BUNDLE_GEMFILE = vim.fn.getenv("GLOBAL_GEMFILE") },
+            cmd = { "ruby-lsp" },
+            filetypes = { "ruby", "eruby" },
+            root_dir = function()
+              return vim.uv.cwd()
+            end,
+          })
+        end,
       },
     })
   end,
