@@ -19,8 +19,15 @@ opt.list = true
 opt.listchars = "eol:¬"
 
 -- line wrapping
-opt.textwidth = 80
-opt.wrap = true -- enable line wrapping
+opt.textwidth = 0
+opt.wrap = true -- enable visual line wrapping
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text", "gitcommit" },
+  callback = function()
+    vim.opt_local.textwidth = 80
+  end,
+})
 
 -- search settings
 opt.ignorecase = true -- ignore case when searching
