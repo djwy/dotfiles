@@ -46,7 +46,6 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1  # make prompt faster
 export EDITOR='nvim'
 export FZF_DEFAULT_COMMAND='rg --no-messages --files --ignore-case --hidden --follow --glob "!.git/*"'
 export KEYTIMEOUT=1
-export USING_ASDF=true
 export VISUAL="$EDITOR"
 
 # ALIASES
@@ -72,4 +71,7 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-. $(brew --prefix asdf)/libexec/asdf.sh
+# . $(brew --prefix asdf)/libexec/asdf.sh
+eval "$(/opt/homebrew/bin/mise activate zsh)"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
