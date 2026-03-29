@@ -31,7 +31,6 @@ return {
       automatic_installation = true,
       -- list of servers for mason to install
       ensure_installed = {
-        "biome",
         "cssls",
         "cssmodules_ls",
         "cucumber_language_server",
@@ -49,7 +48,6 @@ return {
 
     mason_tool_installer.setup({
       ensure_installed = {
-        "biome", -- js/ts linter & formatter
         { "eslint_d", version = "13.1.2" }, -- js linter
         "prettier", -- prettier formatter
         "rubocop", -- ruby formatter
