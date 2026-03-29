@@ -30,7 +30,7 @@
     log = "diff-highlight | less"
     show = "diff-highlight | less"
 [push]
-    default = upstream
+    default = current
     autoSetupRemote = true
 [rerere]
     enabled = 1
