@@ -42,3 +42,7 @@ keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, desc = "Move one split left
 keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, desc = "Move one split down" })
 keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, desc = "Move one split up" })
 keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, desc = "Move one split right" })
+
+-- reselect visual block after indent/outdent
+keymap.set("v", "<", "<gv", { noremap = true, desc = "Continue outdenting" })
+keymap.set("v", ">", ">gv", { noremap = true, desc = "Continue indenting" })
