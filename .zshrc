@@ -64,11 +64,12 @@ alias vi='nvim'
 # FZF
 [ -f ~/.fzf.zsh ] && source $HOME/.fzf.zsh
 
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-
-  autoload -Uz compinit
+FPATH=/opt/homebrew/share/zsh/site-functions:$FPATH
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
   compinit
+else
+  compinit -C
 fi
 
 # . $(brew --prefix asdf)/libexec/asdf.sh
