@@ -39,6 +39,7 @@ return {
         "lua_ls",
         "rubocop",
         "ruby_lsp",
+        "rust_analyzer",
         "sqlls",
         "svelte",
         "tailwindcss",
