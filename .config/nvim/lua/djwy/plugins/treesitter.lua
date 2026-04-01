@@ -29,6 +29,7 @@ return {
       "ruby",
       "scss",
       "sql",
+      "svelte",
       "tsx",
       "typescript",
       "vim",

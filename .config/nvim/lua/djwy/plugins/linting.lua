@@ -10,6 +10,7 @@ return {
       javascriptreact = { "eslint_d" },
       ruby = { "rubocop" },
       scss = { "stylelint" },
+      svelte = { "eslint_d" },
       typescript = { "eslint_d" },
       typescriptreact = { "eslint_d" },
     }
