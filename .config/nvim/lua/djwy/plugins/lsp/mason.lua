@@ -54,6 +54,7 @@ return {
         { "eslint_d", version = "13.1.2" }, -- js linter
         "goimports", -- go import organizer
         "prettier", -- prettier formatter
+        "stylelint", -- css/scss linter
         -- "rubocop", -- ruby formatter (using mise shim instead)
         "stylua", -- lua formatter
       },
