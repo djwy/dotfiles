@@ -1,6 +1,6 @@
 return {
   "ibhagwan/fzf-lua",
-  dependencies = { "nvim-tree/nvim-web-devicons", "junegunn/fzf", build = "./install --bin" },
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   cmd = "FzfLua",
   keys = {
     { "<C-p>", "<cmd>FzfLua files<cr>", desc = "Fuzzy find files in cwd" },
@@ -8,6 +8,13 @@ return {
     { "<C-f>", "<cmd>FzfLua live_grep<cr>", desc = "Find string in cwd" },
   },
   opts = {
+    defaults = { git_icons = false }, -- skip per-file `git status` lookups (biggest win)
+    files = {
+      previewer = false, -- no preview for file picking; feels instant
+    },
+    buffers = {
+      previewer = false,
+    },
     grep = {
       rg_opts = [[--hidden --follow --line-number --column -g "!.git"]],
     },
