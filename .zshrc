@@ -1,5 +1,10 @@
-# load brew for M1
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# load brew for M1 (static output of `brew shellenv`, avoids ~0.1s per shell)
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+export HOMEBREW_REPOSITORY="/opt/homebrew"
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 
 # add my scripts to the path
 export PROJECTS_PATH="$HOME/dev"
@@ -26,7 +31,6 @@ if ! zgenom saved; then
 
   # specify plugins here
   zgenom eval "$(starship init zsh)"
-  zgenom load starship/starship
   zgenom load Aloxaf/fzf-tab
   zgenom load zsh-users/zsh-autosuggestions
   zgenom load zsh-users/zsh-completions
@@ -64,7 +68,6 @@ alias vi='nvim'
 # FZF
 [ -f ~/.fzf.zsh ] && source $HOME/.fzf.zsh
 
-FPATH=/opt/homebrew/share/zsh/site-functions:$FPATH
 autoload -Uz compinit
 if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
   compinit
