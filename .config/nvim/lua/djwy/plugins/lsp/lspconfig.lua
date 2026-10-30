@@ -2,6 +2,7 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
+    "mason-org/mason.nvim",
     "hrsh7th/cmp-nvim-lsp",
     "mason-org/mason-lspconfig.nvim",
     { "antosha417/nvim-lsp-file-operations", config = true },
@@ -101,6 +102,17 @@ return {
             capabilities = capabilities,
           })
         end,
+        ["cucumber_language_server"] = function()
+          lspconfig["cucumber_language_server"].setup({
+            capabilities = capabilities,
+            settings = {
+              cucumber = {
+                features = { "features/**/*.feature" },
+                glue = { "features/step_definitions/**/*.rb" },
+              },
+            },
+          })
+        end,
         ["graphql"] = function()
           -- configure graphql language server
           lspconfig["graphql"].setup({
@@ -141,7 +153,7 @@ return {
           lspconfig["ruby_lsp"].setup({
             capabilities = capabilities,
             cmd_env = { BUNDLE_GEMFILE = vim.fn.getenv("GLOBAL_GEMFILE") },
-            cmd = { "ruby-lsp" },
+            cmd = { vim.fn.expand("~/.local/share/mise/shims/ruby-lsp") },
             filetypes = { "ruby", "eruby" },
             root_dir = function()
               return vim.uv.cwd()
